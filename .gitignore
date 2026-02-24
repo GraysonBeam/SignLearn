@@ -1,0 +1,34 @@
+# --- Python / Environment ---
+.venv/
+venv/
+env/
+bin/
+lib/
+include/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- AI/ML Specific ---
+# Ignore raw image data/videos (datasets get huge fast)
+data/raw/
+data/interim/
+# Keep processed landmarks (usually small CSVs/NumPy files)
+# !data/processed/
+
+# Ignore large model files (use Git LFS or external storage for these)
+*.h5
+*.pth
+*.pb
+*.weights
+*.onnx
+
+# --- IDE / System ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# --- Notebooks ---
+.ipynb_checkpoints
