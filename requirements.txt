@@ -1,14 +1,14 @@
 # --- Core Computer Vision & ML ---
-opencv-python           # For camera access and image processing
-mediapipe               # For high-speed hand tracking
-tensorflow              # For model training and inference
-numpy                   # For landmark data manipulation
+opencv-python>=4.8.0      # Works with any 0.10.x MediaPipe
+mediapipe==0.10.11        # Pinned for stable 'solutions' access
+tensorflow<2.16           # 2.16+ requires Keras 3, which can conflict with MP
+numpy<2.0.0               # CRITICAL: MediaPipe 0.10.11 crashes on NumPy 2.x
 
 # --- Data Handling & Evaluation ---
-pandas                  # For saving landmarks to CSV
-scikit-learn            # For training/test splits and confusion matrices
-matplotlib              # For plotting training curves
-seaborn                 # For visualizing the confusion matrix
+pandas>=2.0.0             # Modern, stable dataframes
+scikit-learn              # Standard ML utilities
+matplotlib                # For plotting training curves
+seaborn                   # For confusion matrices
 
 # --- UI & Deployment ---
-streamlit               # Quickest way to build the "Teacher" web interface
+streamlit                 # For the teacher interface
