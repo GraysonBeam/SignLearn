@@ -1,3 +1,6 @@
+import os
+
+import cv2
 import mediapipe.python.solutions.hands as mp_hands
 import numpy as np
 
@@ -43,3 +46,38 @@ def extract_normalized_landmarks(image_rgb):
     # 5. Step C: Flattening
     # Convert [[x1,y1], [x2,y2]...] into [x1, y1, x2, y2...]
     return normalized_coords.flatten()
+
+
+def start_processing():
+    DATA_PATH = r"C:\Users\repla\signLearn\data"
+
+    # Use os.scandir to iterate through the main directory
+    for symbol_entry in os.scandir(DATA_PATH):
+        # 1. Skip non-directory files like __init__.py or hidden files
+        if not symbol_entry.is_dir() or symbol_entry.name.startswith("."):
+            continue
+
+        # 2. Define the path for the processed data folder
+        processed_dir = os.path.join(symbol_entry.path, "processed_data")
+
+        # Create the directory safely if it doesn't exist
+        os.makedirs(processed_dir, exist_ok=True)
+
+        # 3. Iterate through images in the symbol's directory
+        for file_entry in os.scandir(f"{symbol_entry.path}/raw_data"):
+            # Process only files (images), skipping the 'processed_data' folder itself
+            if file_entry.is_file() and not file_entry.name.startswith("."):
+                # Load image with OpenCV to pass RGB data to MediaPipe
+                image = cv2.imread(file_entry.path)
+                if image is None:
+                    continue
+                image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+                # Extract landmarks
+                landmarks = extract_normalized_landmarks(image_rgb)
+
+                if landmarks is not None:
+                    # 4. Save coords as an .npy file using the original filename
+                    output_filename = f"{os.path.splitext(file_entry.name)[0]}.npy"
+                    output_path = os.path.join(processed_dir, output_filename)
+                    np.save(output_path, landmarks)
