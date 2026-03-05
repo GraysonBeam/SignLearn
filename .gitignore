@@ -11,8 +11,7 @@ __pycache__/
 
 # --- AI/ML Specific ---
 # Ignore raw image data/videos (datasets get huge fast)
-data/raw/
-data/interim/
+data/
 # Keep processed landmarks (usually small CSVs/NumPy files)
 # !data/processed/
 
