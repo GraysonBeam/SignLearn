@@ -1,11 +1,16 @@
+from pathlib import Path
+
 import numpy as np
 from sklearn.model_selection import train_test_split
 
 
 def start_training(model):
+    BASE_PATH = Path(__file__).resolve().parent
+    DATA_PATH = BASE_PATH.parent / "data"
+
     # 1. Load the master files
-    X = np.load(r"C:\Users\repla\signLearn\data\x_train.npy")
-    y = np.load(r"C:\Users\repla\signLearn\data\y_train.npy")
+    X = np.load(DATA_PATH / "x_train.npy")
+    y = np.load(DATA_PATH / "y_train.npy")
 
     # Reshape (Samples, 42) -> (Samples, 42, 1) for Conv1D
     X = X.reshape(X.shape[0], X.shape[1], 1)

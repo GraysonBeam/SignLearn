@@ -25,9 +25,21 @@ def run_app():
     app.start()
 
 
+def train():
+    print("creating model factory")
+    mf = model_factory()
+    print("creating model")
+    model = mf.create_model()
+    print("starting training")
+    start_training(model)
+
+
 if __name__ == "__main__":
     # Uncomment the line below to run the full pipeline (processing + training + app)
     # train_and_run()
 
     # If you only want to run the app (after processing and training are done), use this:
     run_app()
+
+    # If you only want to train the model (after processing is done), use this:
+    # train()

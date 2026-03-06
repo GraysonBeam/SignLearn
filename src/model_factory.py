@@ -1,6 +1,9 @@
 import os
+from pathlib import Path
 
 from tensorflow.keras import layers, models
+
+BASE_DIR = Path(__file__).resolve().parent
 
 
 class model_factory:
@@ -8,7 +11,7 @@ class model_factory:
         self.num_classes = len(
             [
                 d.name
-                for d in os.scandir(r"C:\Users\repla\signLearn\data")
+                for d in os.scandir(BASE_DIR.parent / "data" / "raw_data")
                 if d.is_dir() and not d.name.startswith(".")
             ]
         )

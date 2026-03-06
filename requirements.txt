@@ -12,3 +12,6 @@ seaborn                   # For confusion matrices
 
 # --- UI & Deployment ---
 streamlit                 # For the teacher interface
+
+# --- File Handling & Misc ---
+pathlib

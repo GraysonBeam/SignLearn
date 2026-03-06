@@ -1,5 +1,6 @@
 import json as json_module
 import os
+from pathlib import Path
 
 import cv2
 import mediapipe.python.solutions.hands as mp_hands
@@ -51,18 +52,21 @@ def extract_normalized_landmarks(image_rgb):
 
 
 def start_processing():
+    BASE_DIR = Path(__file__).resolve().parent
+
     os.system("cls" if os.name == "nt" else "clear")
     print("Processing data...")
     print("[] 0%\r", end="")
 
-    DATA_PATH = r"C:\Users\repla\signLearn\data"
+    RAW_DATA_PATH = BASE_DIR.parent / "data" / "raw_data"
+    DATA_PATH = BASE_DIR.parent / "data"
 
     # Use os.scandir to iterate through the main directory
     letter = 0
     total_features = []
     y_train = []
 
-    for symbol_entry in os.scandir(DATA_PATH):
+    for symbol_entry in os.scandir(RAW_DATA_PATH):
         # 1. Skip non-directory files like __init__.py or hidden files
         if not symbol_entry.is_dir() or symbol_entry.name.startswith("."):
             continue
